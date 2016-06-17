@@ -8,17 +8,12 @@
 
 <script>
 
- alert(" onLoad Call "); 
+$("document").baked( function() { 
 
-// <script src="js/jEngine_Earth_v1.0.1.js" type="text/javascript"> 
+	$.Earth.show( { container: ".Earth-container" } ); 
+	// alert(" 123 " + $(".Earth-container").innerHTML ); 
 
-function onLoadEvent () { 
-
- alert( " ffff " + document.getElementsByTagName( "div" ).length ); 
-
-}
-
-//$("document").loaded();
+} ); 
 
 </script>
 
@@ -27,7 +22,7 @@ function onLoadEvent () {
 
 <center>ESA InTouch</center>
 
-    <div class="navigation"><div style=""></div></div>
+    <div class="Earth-container" >ooo</div>
     <span class="navigation"><span><</span><span></span><span>></span></span>
 
 	<div></div> 

@@ -72,11 +72,8 @@
 	{ 
 		this.title = "greenwich"; 
 		this.name = "Greenwich"; 
-		this.latitude = 0.0; // parallel 
-		this.longtitude = 0.0; // meridian 
-		this.hemisphereLat = "N"; // "Northern" or 
-"Southern" 
-		this.hemisphereLat = "E"; // "Western" or "Eastern" 
+		this.longtitude = 0.0; 
+		this.latitude = 0.0; 
 
 		this.links = function ( param ) 
 		{ 
@@ -94,35 +91,11 @@
 		{
 			this.latitude = param["lat"]; 
 		} 
-		else if ( !isNaN( param["parallel"] ) ) 
-		{ 
-			this.latitude = param["parallel"]; 
-		} 
-		else if ( !isNaN( param["phi"] ) ) 
-		{ 
-			this.latitude = param["phi"];
-		} 
-		else if ( !isNaN( param["?"] ) ) 
-		{ 
-			this.latitude = param["?"]; 
-		}
 
 		if( !isNaN( param["long"] ) ) 
 		{ 
 			this.longtitude = param["long"]; 
 		} 
-		else if ( !isNaN( param["meridian"] ) ) 
-		{ 
-			this.longtitude = param["meridian"]; 
-		} 
-		else if ( !isNaN( param["lambda"] ) )
-		{ 
-			this.longtitude = param["lambda"]; 
-		} 
-		else ( !isNaN( param["?"] ) ) 
-		{ 
-			this.longtitude = param["?"]; 
-		}
 
 		if( param["title"] != null && param["t"] == null ) 
 		{ 
@@ -133,11 +106,6 @@
 			this.title = param["t"]; 
 		}
 
-		if( $.Earth.Landmarks ) 
-		{ 
-			$.Earth.Landmarks.expenseCoordinate( this );
-		} 
-
 	} 
 
 	var Landmarks = function( param ) 
@@ -146,43 +114,12 @@
 
 		this.initialize = function () 
 		{
-			this.loadCoordinates(); 
-
-			return this; 
+			
 		};
 
 		this.vector = function ( param ) 
 		{ 
 			alert( " 123 " ); 
-		}; 
-
-		this.coordinate = function ( nameCoordinate ) 
-		{ 
-			var result = null; 
-
-			if( nameCoordinate ) 
-			{ 
-				result = this.coordinates[nameCoordinate]; 
-			} 
-
-			return result; 
-		} 
-
-		this.expenseCoordinate = function ( coordinate ) 
-		{ 
-			if( coordinate.name )
-			{
-				this.coordinates[coordinate.name] = coordinate; 
-			} 
-
-			alert( this.coordinate("Greenwich").name ); 
-		}; 
-
-		this.loadCoordinates = function () 
-		{ 
-
-			(new Coordinate( { t : "Grinwich", lat : 51.477808, long : -0.001472 } )); 
-
 		}; 
 
 		this.initialize(); 
@@ -192,7 +129,7 @@
 
 	$.Earth = (new Earth()); 
 
-	$.Earth.Landmarks = (new Landmarks());//.initialize(); 
+	$.Earth.Landmarks = (new Landmarks()); 
 
 	$.jEngine.Earth = $.Earth; 
 

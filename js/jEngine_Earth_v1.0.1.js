@@ -77,6 +77,10 @@
 		this.hemisphereLat = "N"; // "Northern" or 
 "Southern" 
 		this.hemisphereLat = "E"; // "Western" or "Eastern" 
+		this.height = 0.0; // height above sea level 
+
+		// Geo scense of landmark 
+		this.scense = {  }; // "Cape", "Island", "City", "Mountain" etc
 
 		this.links = function ( param ) 
 		{ 
@@ -89,6 +93,12 @@
 
 			return this.links; 
 		}; 
+
+		// returns country for coordinate 
+		this.country = function() 
+		{ 
+			return "Ukraine"; 
+		};  
 
 		if( !isNaN( param["lat"] ) ) 
 		{
@@ -181,11 +191,62 @@
 		this.loadCoordinates = function () 
 		{ 
 
-			(new Coordinate( { t : "Grinwich", lat : 51.477808, long : -0.001472 } )); 
+			(new Coordinate( { t : "Grinwich", lat : 51.477808, long : -0.001472, scense : "Grinwich" } )); 
 
-		}; 
+			(new Coordinate( { t : "Cape Agulhas", lat : 0.0, long : 0.0, scense : "Cape" } )); 
+
+			(new Coordinate( { t : "Cape of Good Hope", lat : 0.0, long : 0.0, scense : "Cape", country : "South Africa" } )); 
+
+			(new Coordinate( { t : "Ras Kasar", lat : 0.0, long : 0.0, scense : "Cape", country : "Entrea-Sudan" } )); 
+
+			(new Coordinate( { t : "Cape Coast", lat : 0.0, long : 0.0, scense : "Cape", country : "Ghana" } )); 
+
+			(new Coordinate( { t : "Cape Mesurado", lat : 0.0, long : 0.0, scense : "Cape", country : "Liberia" } )); 
+
+			(new Coordinate( { t : "Cape Palmas", lat : 0.0, long : 0.0, scense : "Cape", country : "Liberia" } )); 
+
+			(new Coordinate( { t : "Grand Cape Mount", lat : 0.0, long : 0.0, scense : "Cape", country : "Liberia" } )); 
+
+			(new Coordinate( { t : "Cape Blanc", lat : 0.0, long : 0.0, scense : "Cape", country : "Mauritania" } )); 
+
+			(new Coordinate( { t : "Cape Juby", lat : 0.0, long : 0.0, scense : "Cape", country : "Marocco" } )); 
+
+			(new Coordinate( { t : "Cape Three Forks", lat : 0.0, long : 0.0, scense : "Cape", country : "Marocco" } )); 
+
+			(new Coordinate( { t : "Cap-Vert", lat : 0.0, long : 0.0, scense : "Cape", country : "Senegal" } )); 
+
+			(new Coordinate( { t : "Cape Guardaful", lat : 0.0, long : 0.0, scense : "Cape", country : "Somalia" } )); 
+
+			(new Coordinate( { t : "Cap Bon", lat : 0.0, long : 0.0, scense : "Cape", country : "Tunisia" } )); 
+
+		}
 
 		this.initialize(); 
+	} 
+
+	var Continent = function ( param ) {
+
+		this.title = ""; 
+		
+		this.name = ""; 
+
+		this.continents = function() 
+		{ 
+			return [ "Africa", "Asia", "Europe", "North America", "South America", "Antarctica" ];
+		}; 
+	} 
+
+	var Country = function ( param ) {
+
+		this.title = "";
+
+		this.name = "";
+
+		this.countries = function() 
+		{
+			return "Ukraine"; 
+		};
+
 	} 
 
 	try { 

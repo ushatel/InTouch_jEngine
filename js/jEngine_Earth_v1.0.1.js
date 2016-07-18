@@ -244,7 +244,7 @@
 
 		this.countries = function() 
 		{
-			return "Ukraine"; 
+			return ["Ukraine"]; 
 		};
 
 	} 
@@ -253,7 +253,7 @@
 
 	$.Earth = (new Earth()); 
 
-	$.Earth.Landmarks = (new Landmarks());//.initialize(); 
+	$.Earth.Landmarks = (new Landmarks()); 
 
 	$.jEngine.Earth = $.Earth; 
 

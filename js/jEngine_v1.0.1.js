@@ -100,7 +100,6 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 				} // Check if CSS Selector asked 
 				else if ( result = $.jEngine.select( param ) ) 
 				{ 
-					
 				} 
 				else 
 				{ 
@@ -122,7 +121,16 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 			elements = document.querySelectorAll ( identifier ); 
 		} 
 
+		$.jEngine.hireActivity( { "activity" : "scalar", "entity" : elements, "instructions" : function() { var result = null; if( elements.length == 1 ) { result = elements[0]; } return result; } } ); 
+
+
 		return elements; 
+	} 
+
+	// Will hook any function on entity in the future 
+	this.hook = function() 
+	{
+
 	} 
 
 	// Set of servants 

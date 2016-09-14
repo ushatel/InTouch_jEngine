@@ -37,7 +37,6 @@
 
 		if ( object != null && object.activity != null && object.entity != null && object.instructions != null ) 
 		{ 
-		
 			(object["entity"])[object["activity"]] = object.instructions; 
 
 			result = object["entity"]; 
@@ -121,13 +120,12 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 			elements = document.querySelectorAll ( identifier ); 
 		} 
 
-		$.jEngine.hireActivity( { "activity" : "scalar", "entity" : elements, "instructions" : function() { var result = null; if( elements.length == 1 ) { result = elements[0]; } return result; } } ); 
-
+		elements = (new jElement(elements)); 
 
 		return elements; 
 	} 
 
-	// Will hook any function on entity in the future 
+	// !!! FUTURE Will hook any function on entity 
 	this.hook = function() 
 	{
 
@@ -158,6 +156,61 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 	}; 
 
  }
+
+ // Initializes all the basic properties, methods for DOM Elements if required 
+ var jElement = function ( elem ) 
+ { 
+
+	// indicates DOM element is jEngineNode 
+	jEngineNode : true; 
+
+	this.workers = function () { 
+
+		$.jEngine.hireActivity( { "activity" : "scalar", "entity" : elem, "instructions" : function() { var result = null; if( elem.length == 1 ) { result = elem[0]; } return result; } } ); 
+
+		$.jEngine.hireActivity ( {  "activity" : "html", "entity" : elem, "instructions" : this.html } ); 
+
+		$.jEngine.hireActivity ( { "activity" : "jElement", "entity" : elem, "instructions" : this } ); 
+
+	} 
+
+	// Allows to write and read innerHTML 
+	this.html = function( html ) { 
+
+		var result = undefined; 
+
+		var elem = undefined; 
+
+		if(this.length > 0) {
+			elem = this[0];
+		} 
+		else { 
+			elem = this;
+		}
+
+		// It is block type element 
+		if( typeof(elem.innerHTML) == "string" ) { 
+
+			if( typeof(html) == "string" || typeof(html) == "String" ) { 
+				elem.innerHTML = html; 
+				result = html;
+			} 
+			else {
+				result = elem.innerHTML; 
+			}
+		} 
+
+		return result; 
+	} 
+
+	// Constructor for Element 
+	return (function( elem, jElementHook ) { 
+
+		jElementHook.workers(); 
+
+		return elem; 
+	})(elem, this); 
+ } 
 
  var Governeurs = function () 
  { 

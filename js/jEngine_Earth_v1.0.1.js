@@ -51,7 +51,6 @@
 
 			var coord = new Coordinate( { title: "Title", long : 2.0, lat : 2.0 } ); 
 
-			
 			return result; 
 		}; 
 

@@ -164,14 +164,35 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 	// indicates DOM element is jEngineNode 
 	jEngineNode : true; 
 
-	this.workers = function () { 
+	this.workers = function ( collection ) { 
 
-		$.jEngine.hireActivity( { "activity" : "scalar", "entity" : elem, "instructions" : function() { var result = null; if( elem.length == 1 ) { result = elem[0]; } return result; } } ); 
+		var elem = undefined; 
+		var children = document.body.children; 
 
-		$.jEngine.hireActivity ( {  "activity" : "html", "entity" : elem, "instructions" : this.html } ); 
+		for( var elemId in children ) { 
 
-		$.jEngine.hireActivity ( { "activity" : "jElement", "entity" : elem, "instructions" : this } ); 
+			elem = children[elemId]; 
 
+			if( typeof(elem.id) == "string" ) { 
+			
+			$.jEngine.hireActivity ( {  "activity" : "html", "entity" : elem, "instructions" : this.html } ); 
+
+			$.jEngine.hireActivity ( {  "activity" : "text", "entity" : elem, "instructions" : this.text } ); 
+
+			$.jEngine.hireActivity ( { "activity" : "jElement", "entity" : elem, "instructions" : this } ); 
+		} 
+
+		} 
+
+	} 
+
+	this.collection = function ( elements ) { 
+
+		if( collection ) { 
+		$.jEngine.hireActivity( { "activity" : "scalar", "entity" : elements, "instructions" : function() { var result = null; if( elements.length == 1 ) { result = elements[0]; } return result; } } ); 
+	} 
+
+		return elements; 
 	} 
 
 	// Allows to write and read innerHTML 
@@ -203,6 +224,34 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 		return result; 
 	} 
 
+	this.text = function ( text ) { 
+
+		var result = undefined; 
+
+		var elem = undefined; 
+
+		if( this.length > 0 ) { 
+			elem = this[0];
+		} 
+		else { 
+			elem = this; 
+		} 
+
+		if( typeof(elem.innerText) == "string" ) { 
+			
+			if( typeof(text) == "string" || typeof(text) == "String" ) { 
+				elem.innerText = text;
+				result = text; 
+			}
+			else { 
+				result = elem.innerText; 
+			} 
+
+		} 
+
+		return result; 		
+	} 
+
 	// Constructor for Element 
 	return (function( elem, jElementHook ) { 
 
@@ -227,5 +276,10 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
  $ = enterprise.engine; 
 
  $.jEngine = enterprise; 
+ 
+ var element = (new jElement());
+ element.workers(); 
+
+ $.jElement = element; 
 
 })();

@@ -10,9 +10,9 @@
 
 $("document").baked( function() { 
 
-	var scalar = $(".Earth-container").scalar();
+	//var scalar = $(".Earth-container").scalar();
 
-	 alert(" 123 " + $(".Earth-container").scalar()); 
+	alert(" 123 " + $(".Earth-container")[0].text() + " " + $(".Earth-container")[0].html() ); 
 
 	$.Earth.show( { container: ".Earth-container" } ); 
 

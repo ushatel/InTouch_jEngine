@@ -12,7 +12,15 @@ $("document").baked( function() {
 
 	//var scalar = $(".Earth-container").scalar();
 
-	alert(" 123 " + $(".Earth-container")[0].text() + " " + $(".Earth-container")[0].html() ); 
+	alert(" Test .text() and .html() methods " + $(".test-placeholder")[0].text() + " " + $(".test-placeholder")[0].html() ); 
+
+	$(".test-placeholder")[0].text("String for test");
+	
+	alert("Test it one more time - .text() " + $(".test-placeholder")[0].text() ); 
+
+	$(".test-placeholder")[0].html("Html for <font style='color: red;'>test</font>"); 
+
+	alert( "Test it one more time - .html() " + $(".test-placeholder")[0].html() ); 
 
 	$.Earth.show( { container: ".Earth-container" } ); 
 
@@ -24,6 +32,8 @@ $("document").baked( function() {
 <body>
 
 <center>ESA InTouch</center>
+
+    <div class="test-placeholder">Test</div>
 
     <div class="Earth-container" >ooo</div>
     <span class="navigation"><span><</span><span></span><span>></span></span>

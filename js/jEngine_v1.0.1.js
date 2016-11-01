@@ -213,6 +213,7 @@ if ( eventData != null && eventData.event != null && eventData.entity && eventDa
 		if( typeof(elem.innerHTML) == "string" ) { 
 
 			if( typeof(html) == "string" || typeof(html) == "String" ) { 
+
 				elem.innerHTML = html; 
 				result = html;
 			} 
